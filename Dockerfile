@@ -15,7 +15,16 @@ RUN addgroup -g $GID $GROUP \
  && passwd -u $USER
 
 RUN apk update \
-    && apk add --no-cache bash openssh openjdk8 git py-pip subversion curl wget
+    && apk add --no-cache \
+            bash \
+            curl \
+            git \
+            openssh \
+            openjdk8 \
+            py-pip \
+            rsync \
+            subversion \
+            wget
 RUN sed -i /etc/ssh/sshd_config \
         -e 's/#PermitRootLogin.*/PermitRootLogin no/' \
         -e 's/#RSAAuthentication.*/RSAAuthentication yes/'  \
