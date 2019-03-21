@@ -19,6 +19,7 @@ RUN apk update \
             bash \
             curl \
             git \
+            nss \
             openssh \
             openjdk8 \
             py-pip \
