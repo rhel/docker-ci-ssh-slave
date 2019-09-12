@@ -5,7 +5,7 @@ ARG USER=ci
 ARG GROUP=ci
 ARG UID=3000
 ARG GID=3000
-ARG CI_AGENT_HOME=/home/${USER}
+ARG CI_AGENT_HOME=/home/$USER
 ARG DOCKER_COMPOSE_VERSION=1.22.0
 
 ENV CI_AGENT_HOME $CI_AGENT_HOME
@@ -15,18 +15,18 @@ RUN addgroup -g $GID $GROUP \
  && passwd -u $USER
 
 RUN apk update \
-    && apk add --no-cache \
-            bash \
-            curl \
-            git \
-            ncurses \
-            nss \
-            openssh \
-            openjdk8 \
-            py-pip \
-            rsync \
-            subversion \
-            wget
+ && apk add --no-cache \
+      bash \
+      curl \
+      git \
+      ncurses \
+      nss \
+      openssh \
+      openjdk8 \
+      py-pip \
+      rsync \
+      subversion \
+      wget
 RUN sed -i /etc/ssh/sshd_config \
         -e 's/#PermitRootLogin.*/PermitRootLogin no/' \
         -e 's/#RSAAuthentication.*/RSAAuthentication yes/'  \
@@ -35,7 +35,11 @@ RUN sed -i /etc/ssh/sshd_config \
         -e 's/#LogLevel.*/LogLevel INFO/' \
     && mkdir /var/run/sshd
 
-RUN pip install --no-cache-dir docker-compose==${DOCKER_COMPOSE_VERSION}
+RUN pip install --no-cache-dir \
+      awscli \
+      docker-compose==$DOCKER_COMPOSE_VERSION \
+      python-magic \
+      s3cmd
 
 RUN delgroup ping \
     && addgroup -g 999 docker \
