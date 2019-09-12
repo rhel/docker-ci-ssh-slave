@@ -41,13 +41,8 @@ RUN pip install --no-cache-dir \
       python-magic \
       s3cmd
 
-RUN env \
-  ECS_CLI=/usr/local/bin/ecs-cli \
-  ECS_URL=https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest \
-  ECS_MD5_URL=$(printf "%s.md5" $ECS_URL) \
- && curl -o $ECS_CLI $ECS_URL \
- && echo \
-      "$(curl -s $ECS_MD5_URL) $ECS_CLI" | md5sum -c -
+RUN curl -o /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest \
+ && chmod +x /usr/local/bin/ecs-cli
 
 RUN delgroup ping \
     && addgroup -g 999 docker \
