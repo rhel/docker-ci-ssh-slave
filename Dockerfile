@@ -19,6 +19,7 @@ RUN apk update \
       bash \
       curl \
       git \
+      groff \
       ncurses \
       nss \
       openssh \
