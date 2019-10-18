@@ -14,9 +14,9 @@ RUN addgroup -g $GID $GROUP \
  && adduser -D -h "$CI_AGENT_HOME" -u "$UID" -G "$GROUP" -s /bin/bash "$USER" \
  && passwd -u $USER
 
-RUN apk update \
- && apk add --no-cache \
+RUN apk add --no-cache \
       bash \
+      ca-certificates \
       curl \
       git \
       groff \
@@ -54,8 +54,8 @@ RUN delgroup ping \
 VOLUME "$CI_AGENT_HOME"
 WORKDIR "$CI_AGENT_HOME"
 
-COPY entrypoint /usr/local/bin/entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 22
 
-ENTRYPOINT [ "entrypoint" ]
+ENTRYPOINT [ "docker-entrypoint.sh" ]
