@@ -1,4 +1,4 @@
-FROM docker:18
+FROM docker:19
 LABEL MAINTAINER="Artyom Nosov <chip@unixstyle.ru>"
 
 ARG USER=ci
