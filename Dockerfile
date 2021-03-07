@@ -19,6 +19,7 @@ RUN apk add --no-cache \
       ca-certificates \
       curl \
       git \
+      gettext \
       groff \
       ncurses \
       nss \
