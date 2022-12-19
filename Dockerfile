@@ -48,7 +48,7 @@ RUN curl -o /usr/local/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-c
  && chmod +x /usr/local/bin/ecs-cli
 
 RUN delgroup ping \
-    && addgroup -g 998 docker \
+    && addgroup -g 999 docker \
     && addgroup $USER docker \
     && ln -s /usr/local/bin/docker /usr/bin/docker 
 
